@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #090d1a;
+  --panel: rgba(19, 26, 48, .82);
+  --line: rgba(159, 177, 255, .13);
+  --muted: #8f9ab9;
+  --cyan: #54e6ff;
+  --pink: #ff6ac2;
+  --violet: #9a7bff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; padding: 34px 18px;
+  display: grid; place-items: center; text-align: center;
+  font-family: 'DM Sans', sans-serif; color: #f5f7ff;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(88, 72, 210, .22), transparent 38%),
+    radial-gradient(ellipse at 85% 75%, rgba(0, 202, 229, .13), transparent 35%),
+    var(--bg);
+}
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .18;
+  background-image: radial-gradient(rgba(180,198,255,.5) .7px, transparent .7px); background-size: 24px 24px; }
+.app { position: relative; width: min(100%, 510px); }
+.hero { margin-bottom: 25px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #aeb8d7; font-size: .68rem; letter-spacing: .22em; font-weight: 800; }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: #5bf0b4; box-shadow: 0 0 12px #5bf0b4; }
+h1 { margin: 13px 0 6px; font: 700 clamp(1.8rem, 6vw, 2.65rem)/1.1 'Space Grotesk', sans-serif; letter-spacing: -.055em; }
+h1 span { color: var(--violet); }
+.subtitle { margin: 0; color: var(--muted); font-size: .92rem; }
+.scoreboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.score-card { min-height: 105px; padding: 12px 8px 10px; display: grid; justify-items: center; align-content: center; gap: 2px; border: 1px solid var(--line); border-radius: 17px; background: rgba(17, 24, 44, .72); box-shadow: 0 8px 25px rgba(0,0,0,.12); }
+.player-mark { font: 700 1rem 'Space Grotesk', sans-serif; }
+.score-x .player-mark, .score-x strong { color: var(--cyan); }
+.score-o .player-mark, .score-o strong { color: var(--pink); }
+.score-draw .player-mark { color: var(--violet); }
+.player-name { font-size: .59rem; font-weight: 800; letter-spacing: .12em; color: #9ca8c8; }
+.score-card strong { font: 700 1.55rem 'Space Grotesk', sans-serif; line-height: 1.1; }
+.score-card small { font-size: .56rem; letter-spacing: .14em; color: #687493; }
+.game-panel { padding: 20px; border: 1px solid rgba(151, 169, 255, .16); border-radius: 25px; background: linear-gradient(145deg, rgba(23,31,57,.92), rgba(13,19,36,.94)); box-shadow: 0 22px 70px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.035); }
+.turn-status { display: flex; justify-content: center; align-items: center; gap: 11px; min-height: 46px; margin-bottom: 17px; }
+.turn-indicator { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; font: 700 1.25rem 'Space Grotesk', sans-serif; color: var(--pink); background: rgba(255,106,194,.1); border: 1px solid rgba(255,106,194,.25); }
+.turn-indicator.x-turn { color: var(--cyan); background: rgba(84,230,255,.1); border-color: rgba(84,230,255,.25); }
+.turn-status > span:last-child { display: grid; text-align: left; gap: 2px; }
+.turn-status small { font-size: .58rem; font-weight: 800; letter-spacing: .16em; color: #7f8bab; }
+.turn-status strong { font-size: .9rem; }
+.game { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: min(100%, 365px); margin: 0 auto; }
+.box { aspect-ratio: 1; min-width: 0; border: 1px solid rgba(147,163,207,.15); border-radius: 17px; background: linear-gradient(145deg, #1b2542, #121a30); color: white; font: 700 clamp(2.8rem, 12vw, 4.2rem)/1 'Space Grotesk', sans-serif; cursor: pointer; transition: transform .18s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.box:hover:enabled { transform: translateY(-3px); border-color: rgba(154,123,255,.65); background: #222d4d; box-shadow: 0 8px 24px rgba(85,76,190,.16); }
+.box:active:enabled { transform: scale(.96); }
+.box:focus-visible, .btn:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.box:disabled { cursor: default; }
+.box.mark-x { color: var(--cyan); text-shadow: 0 0 24px rgba(84,230,255,.28); animation: pop .25s ease-out; }
+.box.mark-o { color: var(--pink); text-shadow: 0 0 24px rgba(255,106,194,.28); animation: pop .25s ease-out; }
+.box.winner { border-color: #5bf0b4; background: rgba(49, 206, 153, .16); box-shadow: 0 0 25px rgba(91,240,180,.13); }
+.actions { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 15px; border-radius: 12px; border: 1px solid transparent; font: 700 .82rem 'DM Sans', sans-serif; cursor: pointer; transition: transform .18s ease, filter .18s ease; }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+.btn span { font-size: 1.1rem; }
+.btn-secondary { color: #d7def6; background: #222c48; border-color: rgba(173,188,255,.12); }
+.btn-primary { color: #090d1a; background: linear-gradient(100deg, #8d7aff, #65e5ff); box-shadow: 0 7px 20px rgba(106,139,255,.18); }
+.footer-note { margin: 20px 0 0; color: #687493; font-size: .59rem; font-weight: 800; letter-spacing: .16em; }
+.footer-note span { color: var(--violet); margin: 0 5px; }
+.toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 2; padding: 12px 18px; border: 1px solid rgba(91,240,180,.25); border-radius: 12px; background: #142b2a; color: #b8ffe2; box-shadow: 0 12px 35px rgba(0,0,0,.3); font-weight: 700; }
+.hide { display: none !important; }
+@keyframes pop { 0% { transform: scale(.65); opacity: .4; } 75% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
+@media (max-width: 420px) {
+  body { padding: 24px 13px; }
+  .game-panel { padding: 15px; border-radius: 21px; }
+  .game { gap: 8px; }
+  .box { border-radius: 13px; }
+  .score-card { min-height: 94px; }
+  .actions { flex-direction: column; }
+  .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
